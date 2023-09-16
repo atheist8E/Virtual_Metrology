@@ -1,8 +1,8 @@
 import os
 import click
 import sqlite3
-from flask import Flask, render_template, redirect, request, current_app, g
 from flask.cli import with_appcontext
+from flask import Flask, render_template, redirect, request, current_app, g
 
 
 app = Flask(__name__)
@@ -43,40 +43,21 @@ def init_app(app):
 def home():
     return render_template('home.html')
 
-@app.route('/query', methods = ['GET', 'POST'])
+@app.route('/analysis_multiple', methods = ['GET', 'POST'])
 def query():
-    #my_db = db.get_db()
-    #history = get_history()
     if request.method == "POST":
-        print(request.form)
         line_id = request.form["LineID"]
-        print(line_id)
         process_id = request.form["ProcessID"]
-        print(process_id)
-        photo_step = request.form["PhotoStep"]
-        print(photo_step)
-        photo_time = request.form["PhotoTime"]
-        print(photo_time)
-        overlay_step = request.form["OverlayStep"]
-        print(overlay_step)
-        overlay_time = request.form["OverlayTime"]
-        print(overlay_time)
-        photo_eqp = request.form["Photo EQP"]
-        print(photo_eqp)
-        lot_id = request.form["LotID"]
-        print(lot_id)
 
-        #cur = my_db.execute("SELECT * FROM ALIGNMENT_DRIVEN_DEFECT WHERE ~")
-        #rows = cur.fetchone()
-        # return render_template('query.html', 
-        #                     accumulated_wafer_map = accumulated_wafer_map_file, 
-        #                     alignment_wafer_map = alignment_wafer_map_file, 
-        #                     overlay_wafer_map = overlay_wafer_map_file,
-        #                     history = history)
-    #return render_template('query.html', history = history)
-    return render_template('query.html')
+        current_step = request.form["CurrentStep"]
+        start_step = request.form["StartStep"]
+
+        duration_start = request.form["DurationStart"]
+        duration_end = request.form["DurationEnd"]
+
+    return render_template('analysis_multiple.html')
 
 
 
 if __name__ == "__main__":
-    app.run(debug= True)
+    app.run(debug = True)
