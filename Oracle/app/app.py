@@ -44,7 +44,7 @@ def home():
     return render_template('home.html')
 
 @app.route('/analysis_multiple', methods = ['GET', 'POST'])
-def query():
+def analysis_multiple():
     if request.method == "POST":
         line_id = request.form["LineID"]
         process_id = request.form["ProcessID"]
@@ -54,6 +54,14 @@ def query():
 
         duration_start = request.form["DurationStart"]
         duration_end = request.form["DurationEnd"]
+
+        cpo = request.form["CPO"]
+        area = request.form["Area"]
+
+        distance = request.form["Distance"]
+        mark_type = request.form["MarkType"]
+
+        print(request.form)
 
     return render_template('analysis_multiple.html')
 
