@@ -96,16 +96,22 @@
             <div class="col-md-12 border border-dark rounded">
                 <ul class="list-group mh-100 overflow-auto">
                     <li class="list-group-item text-center">History</li>
-                    {% for row in history %}
+                    {% for history_index_, history_summary_ in zip(history_index, history_summary) %}
                     <li class="list-group-item">
                         <div class="d-flex">
                             <div>
-                                {{ row }} 
+                                {{ history_summary_ }} 
                             </div> 
-                            <div class="ml-auto">
-                                <i class="bi bi-info" style="font-size: 1.2rem;"></i>
-                                <i class="bi bi-play-fill" style="font-size: 1.2rem;"></i>
-                                <i class="bi bi-trash" style="font-size: 1.2rem;"></i>
+                            <div class="d-flex ml-auto">
+                                <div class="history_info">
+                                    <i class="bi bi-info history_info" id="history_info_{{ history_index_ }}" style="font-size: 1.2rem;"></i>
+                                </div>
+                                <div class="history_play">
+                                    <i class="bi bi-play-fill" id="history_play_{{ history_index_ }}" style="font-size: 1.2rem;"></i>
+                                </div>
+                                <div class="history_trash">
+                                    <i class="bi bi-trash history_trash" id="history_trash_{{ history_index_ }}" style="font-size: 1.2rem;"></i>
+                                </div>
                             </div>
                         </div>
                     </li>
@@ -120,8 +126,17 @@
 <script>
     $( document ).ready( function() {
         $( "#search_button" ).click( function() {
-          $( "#search_section" ).slideToggle("slow");
+            $( "#search_section" ).slideToggle("slow");
         } );
+
+        $('.history_info').bind('click', function() {
+            $.getJSON('/analysis_multiple', {
+                query_index: this.id,
+            },  function(data) {
+                console.log("here");
+            });
+            return false;
+        });
 
         $( "#inputCPO" ).multiselect({
             nonSelectedText: 'Default (All CPO)',
