@@ -1,8 +1,10 @@
 import os
+import time
 import json
 import flask
 import click
 import sqlite3
+import datetime
 
 database_path = ".\\resource\\"
 
@@ -41,13 +43,17 @@ def init_app(app):
 def get_history():
     my_db = get_db()
     cur = my_db.execute("SELECT * FROM ANALYSIS_HISTORY")
-    history = [json.dumps(dict((cur.description[i][0], value) for i, value in enumerate(row))) for row in cur.fetchall()]
-    # print(history)
-    print(history[0])
-    print(history[1])
-    return history
+    results = [(dict((cur.description[i][0], value) for i, value in enumerate(row))) for row in cur.fetchall()]
+    history_summary = [json.dumps({
+                        "DB Insert Time": result["db_insert_time"],
+                        "Process ID": result["process_id"], 
+                        "Current Step": result["current_step"], 
+                        "Start Step": result["start_step"], 
+                        "Duration Start": result["duration_start"], 
+                        "Duration End": result["duration_end"]}) for result in results]
+    return history_summary
 
-def insert_data(request):
+def insert_data(db_insert_time, request):
     columns = [
         "line_id",
         "process_id",
@@ -59,21 +65,47 @@ def insert_data(request):
         "area",
         "distance",
         "mark_type",
+        "db_insert_time",
     ]
     my_db = get_db()
+
+    line_id = request.form["LineID"]
+    process_id = request.form["ProcessID"]
+    current_step = request.form["CurrentStep"]
+    start_step = request.form["StartStep"]
+    duration_start = request.form["DurationStart"]
+    duration_end = request.form["DurationEnd"]
+    distance = request.form["Distance"]
+    mark_type = request.form["MarkType"]
+
+    if "CPO" not in request.form.keys():
+        cpo = ["G_X_1", "G_Y_1", "R_X_1", "R_Y_1", "NIR_X_1", "NIR_Y_1", "FIR_X_1", "FIR_Y_1"]
+    else:
+        cpo = request.form["CPO"]
+    cpo = json.dumps(cpo)
+    
+    if "Area" not in request.form.keys():
+        area = ["PHOTO", "ETCH", "CMP"]
+    else:
+        area = request.form["Area"]
+    area = json.dumps(area)
+
     my_db.execute("INSERT INTO ANALYSIS_HISTORY ({}) VALUES ({})".format(','.join(columns), ','.join(['?' for _ in range(len(columns))])),
         (
-            request.form["LineID"],
-            request.form["ProcessID"],
-            request.form["CurrentStep"],
-            request.form["StartStep"],
-            request.form["DurationStart"],
-            request.form["DurationEnd"],
-            request.form["CPO"],
-            request.form["Area"],
-            request.form["Distance"],
-            request.form["MarkType"])
+            line_id,
+            process_id,
+            current_step,
+            start_step,
+            duration_start,
+            duration_end,
+            cpo,
+            area,
+            distance,
+            mark_type,
+            db_insert_time
+        )
     )
+
     my_db.commit()
 
 #################################################### Rendering ####################################################
@@ -86,11 +118,11 @@ def home():
 @app.route('/analysis_multiple', methods = ['GET', 'POST'])
 def analysis_multiple():
     if flask.request.method == "POST":
-        insert_data(flask.request)
+        db_insert_time = datetime.datetime.now()
+        db_insert_time = db_insert_time.strftime("%Y-%m-%d %H:%M:%S")
+        insert_data(db_insert_time, flask.request)
     history = get_history()
     return flask.render_template('analysis_multiple.html', history = history)
-
-
 
 if __name__ == "__main__":
 

@@ -11,5 +11,6 @@ create table ANALYSIS_HISTORY (
   cpo text not null,
   area text not null,
   distance text not null,
-  mark_type text not null
+  mark_type text not null,
+  db_insert_time text not null
 );

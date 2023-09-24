@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block main %}
 	<div class="container-fluid"> 
-        <div class="row">
+        <div class="row" id="search_section">
             <div class="col-md-12 row px-0 py-1 mx-0 my-0 border border-dark rounded">
                 <form action="{{ url_for('analysis_multiple') }}" method="post" class="container-fluid" id="analysis_condition">
                     <div class="form-inline my-1">
@@ -27,34 +27,50 @@
                     </div>
                     <div class="form-inline my-1">
                         <label for="inputCPO" class="col-md-2 col-form-label font-weight-bold rounded" style="background-color:antiquewhite;">CPO</label>
-                        <select class="col-md-4 rounded" id="inputCPO" name="CPO">
-                            <option value="G_X_1" selected>G_X_1</option>
-                            <option value="G_Y_1">G_Y_1</option>
-                            <option value="R_X_1">R_X_1</option>
-                            <option value="R_Y_1">R_Y_1</option>
-                        </select>
+                        <div class="col-md-4 px-0">
+                            <select id="inputCPO" name="CPO" multiple="multiple">
+                                <option value="G_X_1">G_X_1</option>
+                                <option value="G_Y_1">G_Y_1</option>
+                                <option value="R_X_1">R_X_1</option>
+                                <option value="R_Y_1">R_Y_1</option>
+                                <option value="NIR_X_1">NIR_X_1</option>
+                                <option value="NIR_Y_1">NIR_Y_1</option>
+                                <option value="FIR_X_1">FIR_X_1</option>
+                                <option value="FIR_Y_1">FIR_Y_1</option>
+                            </select>
+                        </div>
 
                         <label for="inputArea"class="col-md-2 col-form-label font-weight-bold rounded" style="background-color:antiquewhite">Area</label>
-                        <select class="col-md-4 rounded" id="inputArea" name="Area">
-                            <option value="Photo" selected>Photo</option>
-                            <option value="Etch">Etch</option>
-                            <option value="CMP">CMP</option>
-                        </select>
+                        <div class="col-md-4 px-0">
+                            <select id="inputArea" name="Area" multiple="multiple">
+                                <option value="PHOTO">PHOTO</option>
+                                <option value="Etch">ETCH</option>
+                                <option value="CMP">CMP</option>
+                                <option value="CVD">CVD</option>
+                                <option value="METAL">METAL</option>
+                                <option value="CLN">CLN</option>
+                                <option value="DIFF">DIFF</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-inline my-1">
                         <label for="inputDistance" class="col-md-2 col-form-label font-weight-bold rounded" style="background-color:antiquewhite">Distance</label>
-                        <select class="col-md-4 rounded" id="inputDistance" name="Distance">
-                            <option value="WSCS Residual" selected>WSCS Residual</option>
-                            <option value="WCS">WCS</option>
-                            <option value="ROPI">ROPI</option>
-                        </select>
+                        <div class="col-md-4 px-0">
+                            <select id="inputDistance" name="Distance">
+                                <option value="WSCS">WSCS</option>
+                                <option value="WCS">WCS</option>
+                                <option value="ROPI">ROPI</option>
+                            </select>
+                        </div>
 
                         <label for="inputMarkType" class="col-md-2 col-form-label font-weight-bold rounded" style="background-color:antiquewhite">Mark Type</label>
-                        <select class="col-md-4 rounded" id="inputMarkType" name="MarkType">
-                            <option value="Orion" selected>Orion</option>
-                            <option value="Orion12">Orion 12</option>
-                            <option value="Orion_Orion12">Orion + Orion 12</option>
-                        </select>
+                        <div class="col-md-4 px-0">
+                            <select id="inputMarkType" name="MarkType">
+                                <option class="text-left" value="Orion_Orion12">Orion + Orion 12</option>
+                                <option class="text-left" value="Orion">Orion</option>
+                                <option class="text-left" value="Orion12">Orion 12</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-inline my-1 justify-content-center">
                         <div class="col-md-6 d-flex">
@@ -69,20 +85,70 @@
                 </form>
             </div>
         </div>
-        <div class = "row">
+        <div class="row justify-content-center" id="search_button_section">
+            <i class="bi bi-chevron-compact-down" id="search_button"></i>
         </div>
-        <div class = "row">
+        <div class="row" id="result_section">
+        </div>
+        <div class="row" id="result_button_section">
+        </div>
+        <div class="row" id="history_section">
             <div class="col-md-12 border border-dark rounded">
                 <ul class="list-group mh-100 overflow-auto">
                     <li class="list-group-item text-center">History</li>
                     {% for row in history %}
-                    <li class="list-group-item"> 
-                        {{ row }} 
-                        <button type="button" class="bi bi-trash"></button>
+                    <li class="list-group-item">
+                        <div class="d-flex">
+                            <div>
+                                {{ row }} 
+                            </div> 
+                            <div class="ml-auto">
+                                <i class="bi bi-info" style="font-size: 1.2rem;"></i>
+                                <i class="bi bi-play-fill" style="font-size: 1.2rem;"></i>
+                                <i class="bi bi-trash" style="font-size: 1.2rem;"></i>
+                            </div>
+                        </div>
                     </li>
                     {% endfor %}
                 </ul>
             </div>
         </div>
     </div> 
+{% endblock %}
+
+{% block script %}
+<script>
+    $( document ).ready( function() {
+        $( "#search_button" ).click( function() {
+          $( "#search_section" ).slideToggle("slow");
+        } );
+
+        $( "#inputCPO" ).multiselect({
+            nonSelectedText: 'Default (All CPO)',
+            buttonWidth: '100%',
+            includeSelectAllOption: true,
+            buttonTextAlignment: 'left'
+        });
+
+        $( "#inputArea" ).multiselect({
+            nonSelectedText: 'Default (PHOTO / ETCH / CMP)',
+            buttonWidth: '100%',
+            includeSelectAllOption: true,
+            buttonTextAlignment: 'left'
+        });
+
+        $( "#inputDistance" ).multiselect({
+            buttonWidth: '100%',
+            buttonTextAlignment: 'left'
+        });
+
+        $( "#inputMarkType" ).multiselect({
+            buttonWidth: '100%',
+            buttonTextAlignment: 'left'
+        });
+
+        $(".multiselect-container button").addClass("d-inline");
+      } );
+
+</script>
 {% endblock %}
