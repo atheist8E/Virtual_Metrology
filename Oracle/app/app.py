@@ -40,49 +40,54 @@ def init_app(app):
 
 #################################################### Utils ####################################################
 
-def get_history(query_index):
+def get_history():
     my_db = get_db()
     cur = my_db.execute("SELECT * FROM ANALYSIS_HISTORY")
     results = [(dict((cur.description[i][0], value) for i, value in enumerate(row))) for row in cur.fetchall()]
-    history_index = [json.dumps({"ID": result["id"]}) for result in results]
-    
-    history_summary = list()
-    if query_index:
-        query_index = query_index.split("_")[-1]
-        query_index = json.loads(query_index)
-        query_index = query_index["ID"]
-        for result in results:
-            if result["id"] == query_index:
-                history_summary.append(json.dumps({
-                                "DB Insert Time": result["db_insert_time"],
-                                "Line ID": result["line_id"], 
-                                "Process ID": result["process_id"], 
-                                "Current Step": result["current_step"], 
-                                "Start Step": result["start_step"], 
-                                "Duration Start": result["duration_start"], 
-                                "Duration End": result["duration_end"],
-                                "CPO": result["cpo"], 
-                                "Area": result["area"], 
-                                "Distance": result["distance"], 
-                                "Mark Type": result["mark_type"], 
-                                }))
-            else:
-                history_summary.append(json.dumps({
-                                "DB Insert Time": result["db_insert_time"],
-                                "Process ID": result["process_id"], 
-                                "Current Step": result["current_step"], 
-                                "Duration Start": result["duration_start"], 
-                                "Duration End": result["duration_end"]}))
-    else:
-        for result in results:
-            history_summary.append(json.dumps({
-                            "DB Insert Time": result["db_insert_time"],
-                            "Process ID": result["process_id"], 
-                            "Current Step": result["current_step"], 
-                            "Duration Start": result["duration_start"], 
-                            "Duration End": result["duration_end"]}))
-  
+    history_index = [result["id"] for result in results]
+    history_summary = [json.dumps({
+                        "DB Insert Time": result["db_insert_time"],
+                        "Process ID": result["process_id"], 
+                        "Current Step": result["current_step"], 
+                        "Duration Start": result["duration_start"], 
+                        "Duration End": result["duration_end"]}) for result in results]
     return history_index, history_summary
+
+def get_history_info(query_index):
+    if "spanned" in query_index:
+        action = "simplify"
+    else:
+        action = "span"
+    print(action)
+    query_index = query_index.split("_")[-1]
+    my_db = get_db()
+    cur = my_db.execute("SELECT * FROM ANALYSIS_HISTORY")
+    results = [(dict((cur.description[i][0], value) for i, value in enumerate(row))) for row in cur.fetchall()]
+    for result in results:
+        if result["id"] == int(query_index):
+            if action == "span":
+                return json.dumps({
+                        "DB Insert Time": result["db_insert_time"],
+                        "Line ID": result["line_id"], 
+                        "Process ID": result["process_id"], 
+                        "Current Step": result["current_step"], 
+                        "Start Step": result["start_step"], 
+                        "Duration Start": result["duration_start"], 
+                        "Duration End": result["duration_end"],
+                        "CPO": result["cpo"], 
+                        "Area": result["area"], 
+                        "Distance": result["distance"], 
+                        "Mark Type": result["mark_type"], 
+                        })
+            else:
+                print("here")
+                return json.dumps({
+                        "DB Insert Time": result["db_insert_time"],
+                        "Process ID": result["process_id"], 
+                        "Current Step": result["current_step"], 
+                        "Duration Start": result["duration_start"], 
+                        "Duration End": result["duration_end"]})
+    return None
 
 def insert_data(db_insert_time, request):
     columns = [
@@ -148,37 +153,38 @@ def home():
 
 @app.route('/analysis_multiple', methods = ['GET', 'POST'])
 def analysis_multiple():
-    query_index = None
     if flask.request.method == "POST":
-        db_insert_time = datetime.datetime.now()
-        db_insert_time = db_insert_time.strftime("%Y-%m-%d %H:%M:%S")
-        insert_data(db_insert_time, flask.request)
-        history_index, history_summary = get_history(query_index)
-        return flask.render_template('analysis_multiple.html', 
-            history_index = history_index, 
-            history_summary = history_summary, 
-            zip = zip), 200
+        print(flask.request.form)
+        if flask.request.form["type"] == "run":
+            db_insert_time = datetime.datetime.now()
+            db_insert_time = db_insert_time.strftime("%Y-%m-%d %H:%M:%S")
+            insert_data(db_insert_time, flask.request)
+            #TODO Calculate
+        
+        elif flask.request.form["type"] == "reset":
+            print("Reset Function Not Implemented")
 
-    elif flask.request.method == "GET":
-        query_index = flask.request.args.get('query_index', None, str)
-        history_index, history_summary = get_history(query_index)
-        return flask.render_template('analysis_multiple.html', 
-            history_index = history_index, 
-            history_summary = history_summary, 
-            zip = zip), 200
+        elif flask.request.form["type"] == "info":
+            info_index = flask.request.form["info_index"]
+            if info_index:
+                db_index = info_index.split("_")[-1]
+                content_index = info_index.replace("spanned_", "")
+                content_index = content_index.replace("info", "content")
+                content_data = get_history_info(info_index)
+                return flask.jsonify(
+                    db_index = db_index, 
+                    info_index = info_index,
+                    content_index = content_index,
+                    content_data = content_data)
+
+        return flask.redirect(flask.url_for("analysis_multiple"))
+
+    history_index, history_summary = get_history()
+    return flask.render_template('analysis_multiple.html', 
+        history_index = history_index, 
+        history_summary = history_summary, 
+        zip = zip), 200
     
-    # history_index, history_summary = get_history(query_index)
-    # return flask.render_template('analysis_multiple.html', 
-    #                             history_index = history_index, 
-    #                             history_summary = history_summary, 
-    #                             zip = zip)
-
-@app.route('/analysis_multiple/<query_index>', methods = ['GET'])
-def analysis_multiple_history_info(query_index):
-    query_index = flask.request.args.get('query_index', None, str)
-    data = {'message': 'Done', 'code': 'SUCCESS'}
-    return flask.make_response(flask.jsonify(data), 201)
-
 if __name__ == "__main__":
 
-    app.run(debug = True)
+    app.run(debug = False)
