@@ -4,176 +4,28 @@
 }
 .custom_menu{
     font-family: Noto Sans KR !important;
-    color: #fce2db !important;
+    color: antiquewhite !important;
     font-weight: bold !important;
 }
 
 /*===================== Home ======================*/ 
-.custom_banner{
-    height: 80vh;
-    border-radius: 0.25rem;
-    border-style: solid;
-    background-image: url("../images/conductor_crop.jpg");
-    background-size: 100% 100%;
-}
 
-.custom_banner_slogan_wrapper{
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+/*===================== Analysis (Multiple) ======================*/ 
 
-.custom_banner_slogan_title{
-    font-family: 'Times New Roman', Times, serif !important;
-    font-style: italic !important;
-    font-size: 5rem !important;
-    color: black !important;
-}
-
-.custom_banner_slogan_desc{
-    font-family: 'Times New Roman', Times, serif !important;
-    font-style: italic !important;
-    font-size: 2.5rem !important;
-    color: black !important;
-}
-
-.custom_banner_slogan_author{
-    font-family: 'Times New Roman', Times, serif !important;
-    font-style: italic !important;
-    font-size: 1.5rem !important;
-    color: black!important;
-}
-
-.custom_section{
-    height: 80vh;
-    border-radius: 0.25rem;
-    border-style: solid;
-}
-
-.custom_section_img{
-    border-radius: 0.25rem;
-    border-style: solid;
-}
-
-.custom_section_desc{
-    border-radius: 0.25rem;
-    border-style: solid;
-}
-
-#custom_section_mine .custom_section_img{
-    background-image: url("../images/fountain_crop.jpg");
-    background-size: 100% 100%;
-}
-
-
-#custom_section_paino .custom_section_img{
-    background-image: url("../images/pianist_crop.jpg");
-    background-size: 100% 100%;
-}
-
-#custom_section_jabberwocky .custom_section_img{
-    background-image: url("../images/edm_crop.jpg");
-    background-size: 100% 100%;
-}
-
-.custom_section_desc_title{
-    font-family: 'Times New Roman', Times, serif !important;
-    font-style: italic !important;
-    font-size: 2.5rem !important;
-    color: black!important;
-}
-
-.custom_section_desc_desc{
-    font-family: 'Times New Roman', Times, serif !important;
-    font-style: italic !important;
-    font-size: 1.5rem !important;
-    color: black!important;
-}
-
-#custom_section_mine .custom_section_desc_img{
-    background-image: url("../images/mine_mine.jpg");
-    background-size: 100% 100%;
-}
-
-#custom_section_paino .custom_section_desc_img{
-    background-image: url("../images/paino.jpg");
-    background-size: 100% 100%;
-}
-
-#custom_section_jabberwocky .custom_section_desc_img{
-    background-image: url("../images/jabberwocky.jpg");
-    background-size: 100% 100%;
-}
-
-
-
-/*===================== Mine ======================*/ 
-
-.custom_main_section{
-    height: 90vh;
-}
-
-.custom_main_image{
-    max-width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: -1;
-}
-
-.custom_input_wrapper{
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.custom_button{
+.custom_run_button{
     color: white;
-    background-color: #371a60;
-    border-color: #371a60;
+    background-color: mediumpurple;
+    border-color: mediumpurple;
     font-weight: bold;
 }
 
-.custom_control{
-    border-radius: 0.25rem;
-    border-style: solid;
-    max-width: 100%;
-    height: 45vh;
+.custom_clear_button{
+    color: white;
+    background-color:mediumseagreen;
+    border-color: mediumseagreen;
+    font-weight: bold;
 }
 
-.custom_source_info{
-    width: 100%;
-    height: 50%;
-    border-radius: 0.25rem;
-    border-style: solid;
-    display: flex;
-}
-
-.custom_source_image_wrapper{
-    width: 60%;
-    height: 100%;
-}
-
-.custom_source_image{
-    width: 100%;
-    height: 100%;
-    border-radius: 0.25rem;
-    border-style: solid;
-}
-
-.custom_source_meta_wrapper{
-    width: 40%;
-}
-
-.custom_source_meta{
-    width: 100%;
-    height: 100%;
-}
-
-.custom_smooth_border{
-    border-radius: 0.25rem;
-    border-style: solid;
-}
-
-/*===================== JabberWocky ======================*/ 
+/*=====================  Analysis (Single) ======================*/ 
 
 
