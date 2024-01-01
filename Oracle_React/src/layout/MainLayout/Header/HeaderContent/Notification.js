@@ -25,7 +25,7 @@ import MainCard from 'components/MainCard';
 import Transitions from 'components/@extended/Transitions';
 
 // assets
-import { BellOutlined, CloseOutlined, GiftOutlined, MessageOutlined, SettingOutlined } from '@ant-design/icons';
+import { BellOutlined, CloseOutlined, LineChartOutlined, DotChartOutlined, WarningOutlined, DownloadOutlined } from '@ant-design/icons';
 
 // sx styles
 const avatarSX = {
@@ -106,8 +106,10 @@ const Notification = () => {
               sx={{
                 boxShadow: theme.customShadows.z1,
                 width: '100%',
-                minWidth: 285,
-                maxWidth: 420,
+                minWidth: 600,
+                maxWidth: 700,
+                // minWidth: 285,
+                // maxWidth: 420,
                 [theme.breakpoints.down('md')]: {
                   maxWidth: 285
                 }
@@ -140,57 +142,27 @@ const Notification = () => {
                       <ListItemAvatar>
                         <Avatar
                           sx={{
-                            color: 'success.main',
-                            bgcolor: 'success.lighter'
+                            color: 'dark.main',
+                            bgcolor: 'white.lighter'
                           }}
                         >
-                          <GiftOutlined />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={
-                          <Typography variant="h6">
-                            It&apos;s{' '}
-                            <Typography component="span" variant="subtitle1">
-                              Cristina danny&apos;s
-                            </Typography>{' '}
-                            birthday today.
-                          </Typography>
-                        }
-                        secondary="2 min ago"
-                      />
-                      <ListItemSecondaryAction>
-                        <Typography variant="caption" noWrap>
-                          3:00 AM
-                        </Typography>
-                      </ListItemSecondaryAction>
-                    </ListItemButton>
-                    <Divider />
-                    <ListItemButton>
-                      <ListItemAvatar>
-                        <Avatar
-                          sx={{
-                            color: 'primary.main',
-                            bgcolor: 'primary.lighter'
-                          }}
-                        >
-                          <MessageOutlined />
+                          <DownloadOutlined />
                         </Avatar>
                       </ListItemAvatar>
                       <ListItemText
                         primary={
                           <Typography variant="h6">
                             <Typography component="span" variant="subtitle1">
-                              Aida Burg
+                            [Download Complete - Anomaly]:
                             </Typography>{' '}
-                            commented your post.
+                            2024/01/01 (2 Lots)
                           </Typography>
                         }
-                        secondary="5 August"
+                        secondary="1 min ago"
                       />
                       <ListItemSecondaryAction>
                         <Typography variant="caption" noWrap>
-                          6:00 PM
+                          2:45 PM
                         </Typography>
                       </ListItemSecondaryAction>
                     </ListItemButton>
@@ -203,19 +175,19 @@ const Notification = () => {
                             bgcolor: 'error.lighter'
                           }}
                         >
-                          <SettingOutlined />
+                          <WarningOutlined />
                         </Avatar>
                       </ListItemAvatar>
                       <ListItemText
                         primary={
                           <Typography variant="h6">
-                            Your Profile is Complete &nbsp;
                             <Typography component="span" variant="subtitle1">
-                              60%
+                            [Analysis Updated - Anomaly]:
                             </Typography>{' '}
+                            2024/01/01 (2 Lots)
                           </Typography>
                         }
-                        secondary="7 hours ago"
+                        secondary="1 hour ago"
                       />
                       <ListItemSecondaryAction>
                         <Typography variant="caption" noWrap>
@@ -232,38 +204,55 @@ const Notification = () => {
                             bgcolor: 'primary.lighter'
                           }}
                         >
-                          C
+                          <DotChartOutlined />
                         </Avatar>
                       </ListItemAvatar>
                       <ListItemText
                         primary={
                           <Typography variant="h6">
                             <Typography component="span" variant="subtitle1">
-                              Cristina Danny
+                            [Analysis Updated - Daily]:
                             </Typography>{' '}
-                            invited to join{' '}
-                            <Typography component="span" variant="subtitle1">
-                              Meeting.
-                            </Typography>
+                            2024/01/01 (15 Lots)
                           </Typography>
                         }
-                        secondary="Daily scrum meeting time"
+                        secondary="2 hour ago"
                       />
                       <ListItemSecondaryAction>
                         <Typography variant="caption" noWrap>
-                          9:10 PM
+                          6:00 PM
                         </Typography>
                       </ListItemSecondaryAction>
                     </ListItemButton>
                     <Divider />
-                    <ListItemButton sx={{ textAlign: 'center', py: `${12}px !important` }}>
+                    
+                    <ListItemButton>
+                      <ListItemAvatar>
+                        <Avatar
+                          sx={{
+                            color: 'success.main',
+                            bgcolor: 'success.lighter'
+                          }}
+                        >
+                          <LineChartOutlined />
+                        </Avatar>
+                      </ListItemAvatar>
                       <ListItemText
                         primary={
-                          <Typography variant="h6" color="primary">
-                            View All
+                          <Typography variant="h6">
+                            <Typography component="span" variant="subtitle1">
+                              [Analysis Updated - Periodical]: 
+                            </Typography>{' '}
+                            2023/12/01 ~ 2024/01/01 (100 Lots)
                           </Typography>
                         }
+                        secondary="4 hour ago"
                       />
+                      <ListItemSecondaryAction>
+                        <Typography variant="caption" noWrap>
+                          3:00 AM
+                        </Typography>
+                      </ListItemSecondaryAction>
                     </ListItemButton>
                   </List>
                 </MainCard>

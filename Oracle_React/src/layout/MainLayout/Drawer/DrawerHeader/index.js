@@ -19,11 +19,11 @@ const DrawerHeader = ({ open }) => {
       <Stack direction="row" spacing={1} alignItems="center">
         <Logo />
         <Chip
-          label={process.env.REACT_APP_VERSION}
+          label="Incoming Analysis"
           size="small"
           sx={{ height: 16, '& .MuiChip-label': { fontSize: '0.625rem', py: 0.25 } }}
           component="a"
-          href="https://github.com/codedthemes/mantis-free-react-admin-template"
+          href="https://github.com/atheist8E/Virtual_Metrology"
           target="_blank"
           clickable
         />

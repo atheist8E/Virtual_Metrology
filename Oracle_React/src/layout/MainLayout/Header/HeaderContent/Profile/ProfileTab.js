@@ -6,7 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 
 // assets
-import { EditOutlined, ProfileOutlined, LogoutOutlined, UserOutlined, WalletOutlined } from '@ant-design/icons';
+import { BookOutlined, ContainerOutlined, NotificationOutlined, QuestionCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 
 // ==============================|| HEADER PROFILE - PROFILE TAB ||============================== //
 
@@ -22,34 +22,33 @@ const ProfileTab = ({ handleLogout }) => {
     <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32, color: theme.palette.grey[500] } }}>
       <ListItemButton selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)}>
         <ListItemIcon>
-          <EditOutlined />
+          <BookOutlined />
         </ListItemIcon>
-        <ListItemText primary="Edit Profile" />
+        <ListItemText primary="Bookmark" />
       </ListItemButton>
       <ListItemButton selected={selectedIndex === 1} onClick={(event) => handleListItemClick(event, 1)}>
         <ListItemIcon>
-          <UserOutlined />
+          <ContainerOutlined />
         </ListItemIcon>
-        <ListItemText primary="View Profile" />
+        <ListItemText primary="Analysis History" />
       </ListItemButton>
-
       <ListItemButton selected={selectedIndex === 3} onClick={(event) => handleListItemClick(event, 3)}>
         <ListItemIcon>
-          <ProfileOutlined />
+          <NotificationOutlined />
         </ListItemIcon>
-        <ListItemText primary="Social Profile" />
+        <ListItemText primary="Release Note" />
       </ListItemButton>
       <ListItemButton selected={selectedIndex === 4} onClick={(event) => handleListItemClick(event, 4)}>
         <ListItemIcon>
-          <WalletOutlined />
+          <QuestionCircleOutlined />
         </ListItemIcon>
-        <ListItemText primary="Billing" />
+        <ListItemText primary="Manual" />
       </ListItemButton>
       <ListItemButton selected={selectedIndex === 2} onClick={handleLogout}>
         <ListItemIcon>
-          <LogoutOutlined />
+          <ExclamationCircleOutlined />
         </ListItemIcon>
-        <ListItemText primary="Logout" />
+        <ListItemText primary="VOC" />
       </ListItemButton>
     </List>
   );

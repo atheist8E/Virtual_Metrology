@@ -1,11 +1,12 @@
 // project import
-import dashboard from './dashboard';
-import extractor from './extractor';
+import dashboards from './dashboards';
+import extractors from './extractors';
+import sketches from './sketches';
 
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-  items: [dashboard, extractor]
+  items: [dashboards, extractors, sketches]
 };
 
 export default menuItems;
