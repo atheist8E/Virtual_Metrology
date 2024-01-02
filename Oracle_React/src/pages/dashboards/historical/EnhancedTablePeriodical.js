@@ -17,9 +17,11 @@ import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import DownloadIcon from '@mui/icons-material/Download';
-import ZoomInOutlined from '@mui/icons-material/ZoomIn';
+// import ZoomInOutlined from '@mui/icons-material/ZoomIn';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
+
+import AnalysisResultDialog from './AnalysisResultDialog';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -199,7 +201,8 @@ function EnhancedTableToolbar(props) {
         <Toolbar variant="dense">
           <Tooltip title="ZoomIn">
             <IconButton>
-              <ZoomInOutlined />
+              {/* <ZoomInOutlined /> */}
+              <AnalysisResultDialog></AnalysisResultDialog>
             </IconButton>
           </Tooltip>
           <Tooltip title="Download">
