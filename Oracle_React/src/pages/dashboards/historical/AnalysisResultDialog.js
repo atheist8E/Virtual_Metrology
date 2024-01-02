@@ -1,6 +1,7 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -9,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import ZoomInOutlined from '@mui/icons-material/ZoomIn';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
+import PaginationButtons from './PaginationButtons';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -72,9 +74,12 @@ export default function AnalysisResultDialog() {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+            <Grid container justifyContent="center">
+          {/* <Button autoFocus onClick={handleClose}>
             Save changes
-          </Button>
+          </Button> */}
+                <PaginationButtons></PaginationButtons>
+            </Grid>
         </DialogActions>
       </BootstrapDialog>
     </React.Fragment>
