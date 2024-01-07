@@ -19,7 +19,7 @@ import ZoomInOutlined from '@mui/icons-material/ZoomIn';
 import CloseIcon from '@mui/icons-material/Close';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import PaginationButtons from './PaginationButtons';
+import PaginationButtons from '../PaginationButtons';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {

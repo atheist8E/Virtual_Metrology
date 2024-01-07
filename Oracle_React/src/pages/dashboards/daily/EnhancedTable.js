@@ -215,6 +215,7 @@ function EnhancedTableToolbar(props) {
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
+  tableTitle: PropTypes.string.isRequired
 };
 
 export default function EnhancedTable(props) {
@@ -369,3 +370,8 @@ export default function EnhancedTable(props) {
     </Box>
   );
 }
+
+EnhancedTable.propTypes = {
+  tableTitle: PropTypes.array.isRequired,
+  rows: PropTypes.number.isRequired,
+};

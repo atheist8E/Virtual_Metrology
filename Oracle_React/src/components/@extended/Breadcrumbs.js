@@ -4,7 +4,10 @@ import { Link, useLocation } from 'react-router-dom';
 
 // material-ui
 import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
-import { Grid, Typography } from '@mui/material';
+import { 
+  Grid, 
+  Typography 
+} from '@mui/material';
 
 // project imports
 import MainCard from '../MainCard';

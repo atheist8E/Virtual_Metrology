@@ -44,7 +44,6 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "serve": "react-scripts start --port 3000 --pathname /",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

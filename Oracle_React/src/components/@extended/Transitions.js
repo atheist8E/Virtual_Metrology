@@ -2,7 +2,11 @@ import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
 
 // material-ui
-import { Fade, Box, Grow } from '@mui/material';
+import { 
+  Fade, 
+  Box, 
+  Grow 
+} from '@mui/material';
 
 // ==============================|| TRANSITIONS ||============================== //
 

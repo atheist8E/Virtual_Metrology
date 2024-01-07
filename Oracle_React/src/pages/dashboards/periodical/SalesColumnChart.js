@@ -10,7 +10,7 @@ import ReactApexChart from 'react-apexcharts';
 const columnChartOptions = {
   chart: {
     type: 'bar',
-    height: 430,
+    height: 450,
     toolbar: {
       show: false
     }
@@ -140,7 +140,7 @@ const SalesColumnChart = () => {
 
   return (
     <div id="chart">
-      <ReactApexChart options={options} series={series} type="bar" height={430} />
+      <ReactApexChart options={options} series={series} type="bar" height={450} />
     </div>
   );
 };

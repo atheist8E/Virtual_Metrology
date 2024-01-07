@@ -24,31 +24,31 @@ const dashboards = {
   children: [
     {
       id: 'dashboard',
-      title: 'Dashboard',
+      title: 'Newsfeed',
       type: 'item',
       url: 'dashboards/dashboard',
       icon: icons.ProfileOutlined,
       breadcrumbs: false
     },
     {
-      id: 'periodical',
-      title: 'Periodical',
-      type: 'item',
-      url: 'dashboards/periodical',
-      icon: icons.LineChartOutlined,
-      breadcrumbs: false
-    },
-    {
       id: 'daily',
-      title: 'Daily',
+      title: 'Daily Analysis',
       type: 'item',
       url: 'dashboards/daily',
       icon: icons.DotChartOutlined,
       breadcrumbs: false
     },
     {
+      id: 'periodical',
+      title: 'Periodical Analysis',
+      type: 'item',
+      url: 'dashboards/periodical',
+      icon: icons.LineChartOutlined,
+      breadcrumbs: false
+    },
+    {
       id: 'anomaly',
-      title: 'Anomaly',
+      title: 'Anomaly Detection',
       type: 'item',
       url: 'dashboards/anomaly',
       icon: icons.WarningOutlined,
@@ -56,7 +56,7 @@ const dashboards = {
     },
     {
       id: 'historical',
-      title: 'Historical',
+      title: 'Legacy Patterns',
       type: 'item',
       url: 'dashboards/historical',
       icon: icons.ContainerOutlined,

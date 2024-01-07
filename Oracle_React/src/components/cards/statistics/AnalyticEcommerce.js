@@ -1,7 +1,13 @@
 import PropTypes from 'prop-types';
 
 // material-ui
-import { Box, Chip, Grid, Stack, Typography } from '@mui/material';
+import { 
+  Box, 
+  Chip, 
+  Grid, 
+  Stack, 
+  Typography 
+} from '@mui/material';
 
 // project import
 import MainCard from 'components/MainCard';

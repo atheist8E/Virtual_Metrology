@@ -1,14 +1,20 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Grid, Tab, Tabs, Typography } from '@mui/material';
 
-// project import
+import { 
+  Box, 
+  Grid, 
+  Tab, 
+  Tabs,
+  Typography 
+} from '@mui/material';
+
 import EnhancedTablePeriodical from './EnhancedTablePeriodical';
 import EnhancedTableDaily from './EnhancedTableDaily';
 import EnhancedTableAnomaly from './EnhancedTableAnomaly';
 import MainCard from 'components/MainCard';
 
-// ==============================|| DASHBOARD - DEFAULT ||============================== //
+// ==============================|| DASHBOARD - HISTORICAL ||============================== //
 
 function createDataPeriodical(id, 
   line_id, 
@@ -284,25 +290,25 @@ const Historical = () => {
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={handleChange} textColor="primary" indicatorColor="primary" aria-label="basic tabs example">
-            <Tab label="Periodical" {...a11yProps(0)} />
-            <Tab label="Daily" {...a11yProps(1)} />
+            <Tab label="Daily" {...a11yProps(0)} />
+            <Tab label="Periodical" {...a11yProps(1)} />
             <Tab label="Anomaly" {...a11yProps(2)} />
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
-          {tablePropsListPeriodical.map((tableProps) => {
+          {tablePropsListDaily.map((tableProps) => {
             return (
               <MainCard sx={{ mt: 2 }} content={false} key={tableProps}>
-                <EnhancedTablePeriodical tableTitle={tableProps.tableTitle} rows={tableProps.rows} />
+                <EnhancedTableDaily tableTitle={tableProps.tableTitle} rows={tableProps.rows} />
               </MainCard>
             )
           })}
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          {tablePropsListDaily.map((tableProps) => {
+          {tablePropsListPeriodical.map((tableProps) => {
             return (
               <MainCard sx={{ mt: 2 }} content={false} key={tableProps}>
-                <EnhancedTableDaily tableTitle={tableProps.tableTitle} rows={tableProps.rows} />
+                <EnhancedTablePeriodical tableTitle={tableProps.tableTitle} rows={tableProps.rows} />
               </MainCard>
             )
           })}

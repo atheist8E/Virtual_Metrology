@@ -1,6 +1,10 @@
 import * as React from 'react';
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+import PropTypes from 'prop-types';
+
+import {
+  Pagination,
+  Stack,
+} from '@mui/material';
 
 export default function PaginationButtons(props) {
 
@@ -12,3 +16,7 @@ export default function PaginationButtons(props) {
     </Stack>
   );
 }
+
+PaginationButtons.propTypes = {
+  numSelected: PropTypes.number.isRequired,
+};
