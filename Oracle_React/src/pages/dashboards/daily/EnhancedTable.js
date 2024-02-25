@@ -281,7 +281,7 @@ export default function EnhancedTable(props) {
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage,
       ),
-    [order, orderBy, page, rowsPerPage],
+    [order, orderBy, page, rows, rowsPerPage],
   );
 
   return (

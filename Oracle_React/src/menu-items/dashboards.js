@@ -1,6 +1,6 @@
 // assets
 import { 
-  ProfileOutlined,
+  HomeOutlined,
   LineChartOutlined,
   DotChartOutlined,
   WarningOutlined,
@@ -8,7 +8,7 @@ import {
 
 // icons
 const icons = {
-  ProfileOutlined,
+  HomeOutlined,
   LineChartOutlined,
   DotChartOutlined,
   WarningOutlined,
@@ -23,11 +23,11 @@ const dashboards = {
   type: 'group',
   children: [
     {
-      id: 'dashboard',
-      title: 'Newsfeed',
+      id: 'home',
+      title: 'Home',
       type: 'item',
       url: 'dashboards/dashboard',
-      icon: icons.ProfileOutlined,
+      icon: icons.HomeOutlined,
       breadcrumbs: false
     },
     {
